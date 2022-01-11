@@ -1,13 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow
 from PyQt5.QtGui import QPainter, QColor
 import random
-from PyQt5 import uic
+from UI import Ui_mainWindow
 
 
-class Test(QMainWindow):
+class Test(QMainWindow, Ui_mainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.draw = False
         self.pushButton.clicked.connect(self.circle)
 
@@ -18,11 +18,14 @@ class Test(QMainWindow):
 
     def run(self, qp):
         if self.draw:
+            r = random.randint(0, 255)
+            g = random.randint(0, 255)
+            b = random.randint(0, 255)
             x = random.randint(20, 250)
             y = random.randint(30, 250)
-            r = random.randint(20, 100)
-            qp.setBrush(QColor(200, 200, 0))
-            qp.drawEllipse(x, y, r, r)
+            h = random.randint(20, 100)
+            qp.setBrush(QColor(r, g, b))
+            qp.drawEllipse(x, y, h, h)
             self.draw = False
             qp.end()
 
